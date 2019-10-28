@@ -37,12 +37,11 @@ if (isset($_POST['sku'])) {
 			$insert_result = 'fail';
 		}
 	}
-	else {
-			$insert_result = 'exit';
-	}
-
-	$header = 'Location: /?addProduct=';
-	$header .= $insert_result;
-	header($header);
-
 }
+else {
+	$insert_result = 'exit';
+}
+$header = 'Location: /?addProduct=';
+$header .= $insert_result;
+header($header);
+?>
