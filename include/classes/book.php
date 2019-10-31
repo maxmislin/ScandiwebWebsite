@@ -1,12 +1,12 @@
 <?php
 class Book extends Product{
   //Constructor
-  function __construct(string $sku,string $name,string $price,string $type){
+  public function __construct(string $sku,string $name,string $price,string $type){
     parent::__construct($sku, $name, $price, $type);
     $this->setType($type);
   }
 
-  function setType($weight) {
+  public function setType($weight) {
     $this->type ='Weight: '.$weight." KG";
   }
   

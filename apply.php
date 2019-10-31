@@ -1,5 +1,6 @@
 <?php
-	require_once 'include/database.php';
+  //require_once 'include/classes/database.php';
+  require_once 'include/classes/dbActions.php';
 	?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +21,17 @@
     </div>
   </div>
   
- <form action="include/addProduct.php" method="post">
+  <?php
+    if (isset($_POST['sku'])) {
+      $dbAct = new dbActions();
+      $insert_result = $dbAct->validSku($_POST['sku']);
+      var_dump($insert_result);
+      $header = 'Location: /?addProduct=';
+      $header .= $insert_result;
+      header($header);
+    }
+  ?>
+ <form action="" method="post">
 	  <div class="col-md-3 mb-3">  
       <label for="sku">SKU</label>
       <input type="text" class="form-control" name="sku" placeholder="SKU" required="">
@@ -63,6 +74,7 @@
       </button>
     </div>
   </form>
+
   <script src="js/type_switcher.js"></script>
       
 </body>

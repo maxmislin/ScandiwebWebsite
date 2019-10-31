@@ -1,12 +1,12 @@
 <?php
 class Furniture extends Product {
   //Constructor
-  function __construct(string $sku, string $name, string $price, string $type){
+  public function __construct(string $sku, string $name, string $price, string $type){
     parent::__construct($sku, $name, $price, $type);
     $this->setType($type);
   }
 
-  function setType($dimensions) {
+  public function setType($dimensions) {
     $this->type = 'Dimensions: '. $dimensions;
   }
 

@@ -1,6 +1,9 @@
 <?php
-	require_once 'include/database.php';
-	require_once 'include/get_products.php';
+	//require_once 'include/classes/database.php';
+	//require_once 'include/get_products.php';
+	require_once 'include/classes/dbActions.php';
+	$dbAct = new dbActions();
+  $products = $dbAct->getProducts();
 	?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,11 +25,17 @@
           <a class="btn btn-outline-secondary" href="/apply.php">Apply</a>
         </div>
   </div>
-	<form id="cBox" action="include/massDelete.php" method="post">
+	<?php
+		if (isset($_POST['id'])) {
+			$dbAct = new dbActions();
+			$delete_result = $dbAct->massDelete();
+			$header = 'Location: /?massDelete=';
+			$header .= $delete_result;
+			header($header);
+		}
+	?>
+	<form id="cBox" action="" method="post">
 	<div class="d-flex flex-wrap">
-		<?php
-			$products = get_product();
-		?>
 		<?php
 		foreach($products as $product):
 		?>

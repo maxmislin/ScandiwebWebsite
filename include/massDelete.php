@@ -1,8 +1,8 @@
 <?php
+/*
+require_once 'classes/dbActions.php';
 
-require_once 'database.php';
-
-if (isset($_POST['id'])) {
+/*if (isset($_POST['id'])) {
 
   foreach($_POST['id'] as $id){
     $query = "DELETE FROM product WHERE id = '$id'";
@@ -21,9 +21,10 @@ if (isset($_POST['id'])) {
 else{
   $delete_result = 'exit';
 }
-
+$dbAct = new dbActions();
+$delete_result = $dbAct->massDelete();
 $header = 'Location: /?massDelete=';
 $header .= $delete_result;
 header($header);
-
+*/
 ?>

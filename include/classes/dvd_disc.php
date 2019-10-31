@@ -1,12 +1,12 @@
 <?php
 class DVD_disc extends Product {
   //Constructor
-  function __construct(string $sku,string $name,string $price, string $type){
+  public function __construct(string $sku,string $name,string $price, string $type){
     parent:: __construct($sku, $name, $price, $type);
     $this->setType($type);
   }
   
-  function setType($size) {
+  public function setType($size) {
     $this->type = 'Size: ' .$size." MB"  ;
   }
 
