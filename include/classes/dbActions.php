@@ -6,46 +6,45 @@
   require_once 'furniture.php';
 
 	class dbActions {
+    protected $link;
 
-		public function getProducts() {
+    public function __construct(){
       $db = new Database();
       $db->__construct();
-      $link = $db->connect();
-      
+      $this->link = $db->connect();
+    }
+
+		public function getProducts() {
       $sql = "SELECT * FROM `product`";
 
-      $result = mysqli_query($link, $sql);
+      $result = mysqli_query($this->link, $sql);
 
       $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
       return $products;
     }
     
-    public function validSku(){
-      $db = new Database();
-      $db->__construct();
-      $link = $db->connect();
-
+    public function addProduct(){
       $sku = trim($_POST['sku']);
 
       $query = "SELECT * FROM product WHERE sku = '$sku'";
 
-      $result = mysqli_query($link, $query);
+      $result = mysqli_query($this->link, $query);
         
       if(!mysqli_num_rows($result)){
           
         switch ($_POST["switcher"]) {
           case "disc":
             $product = new DVD_disc ($_POST['sku'], $_POST['name'], $_POST['price'], $_POST['disc']);
-            $result = mysqli_query($link, $product->addDisc($product));
+            $result = mysqli_query($this->link, $product->addDisc($product));
             break;
           case "book":
             $product = new Book ($_POST['sku'], $_POST['name'], $_POST['price'], $_POST['book']);
-            $result = mysqli_query($link, $product->addBook($product));
+            $result = mysqli_query($this->link, $product->addBook($product));
             break;
           case "furniture":
             $product = new Furniture ($_POST['sku'], $_POST['name'], $_POST['price'], $_POST['height'].'x'.$_POST['width'].'x'.$_POST['lenght']);
-            $result = mysqli_query($link, $product->addFurniture($product));
+            $result = mysqli_query($this->link, $product->addFurniture($product));
             break;
         }
       
@@ -64,14 +63,10 @@
     }
     
     public function massDelete(){
-      $db = new Database();
-      $db->__construct();
-      $link = $db->connect();
-
       foreach($_POST['id'] as $id){
         $query = "DELETE FROM product WHERE id = '$id'";
       
-        $result = mysqli_query($link, $query);
+        $result = mysqli_query($this->link, $query);
       }
       
       if ($result) {

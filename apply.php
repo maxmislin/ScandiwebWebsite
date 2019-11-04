@@ -1,5 +1,4 @@
 <?php
-  //require_once 'include/classes/database.php';
   require_once 'include/classes/dbActions.php';
 	?>
 <!DOCTYPE html>
@@ -24,7 +23,7 @@
   <?php
     if (isset($_POST['sku'])) {
       $dbAct = new dbActions();
-      $insert_result = $dbAct->validSku($_POST['sku']);
+      $insert_result = $dbAct->addProduct();
       var_dump($insert_result);
       $header = 'Location: /?addProduct=';
       $header .= $insert_result;

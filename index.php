@@ -1,6 +1,4 @@
 <?php
-	//require_once 'include/classes/database.php';
-	//require_once 'include/get_products.php';
 	require_once 'include/classes/dbActions.php';
 	$dbAct = new dbActions();
   $products = $dbAct->getProducts();
